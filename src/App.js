@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as cocossd from "@tensorflow-models/coco-ssd";
-import { drawRect } from "./utils/utilities";
+import { drawRect } from "./utils";
 
 function App() {
   const videoRef = useRef(null);
