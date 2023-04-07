@@ -6,6 +6,7 @@ import { drawRect } from "./utils/utilities";
 function App() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [animationFrameId, setAnimationFrameId] = useState(null);
 
   // Load the COCO-SSD model
   const loadModel = async () => {
@@ -41,6 +42,10 @@ function App() {
       };
 
       detect();
+      // Add event listener to stop detection when video ends
+      video.addEventListener("ended", () => {
+        cancelAnimationFrame(animationFrameId);
+      });
     }
   };
 
