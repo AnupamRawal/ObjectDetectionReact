@@ -9,12 +9,9 @@ function getFont(canvasWidth) {
 
 export const drawRect = (detections, ctx, canvas) => {
   detections.forEach(predictions => {
-    console.log(predictions)
     //get predictions result
     const [x, y, width, height] = predictions['bbox'];
     const text = predictions['class'];
-
-    console.log(text, x, y, width, height);
     const color = 'red';
     ctx.strokeStyle = color;
     ctx.font = getFont(canvas.width)

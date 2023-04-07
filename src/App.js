@@ -34,6 +34,10 @@ function App() {
       await video.play();
 
       const detect = async () => {
+        if (video.paused || video.ended) {
+          return;
+        }
+
         if (video.readyState === 4) {
           // Perform the object detection
           const obj = await net.detect(video);
@@ -74,6 +78,9 @@ function App() {
             </li>
           ))}
         </ul>
+        <button onClick={() => {
+          window.location.reload();
+        }}>Reset</button>
       </div>
       <input type="file" onChange={handleFileChange} />
       <div style={{ position: "relative" }}>
