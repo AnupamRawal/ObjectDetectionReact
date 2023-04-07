@@ -22,6 +22,15 @@ function App() {
 
       // Start the video playback and wait for it to start
       await video.play();
+
+      const detect = async () => {
+        if (video.readyState === 4) {
+          // Perform the object detection
+          const obj = await net.detect(video);
+        }
+      };
+
+      detect();
     }
   };
 
