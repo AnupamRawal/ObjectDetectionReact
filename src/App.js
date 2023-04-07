@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import { drawRect } from "./utils";
+import './App.css'
 
 function App() {
   const videoRef = useRef(null);
@@ -63,8 +64,14 @@ function App() {
     <div className="App">
       <input type="file" onChange={handleFileChange} />
       <div style={{ position: "relative" }}>
-        <video ref={videoRef} videoWidth="100%" style={{ position: "absolute" }} />
-        <canvas ref={canvasRef} style={{ position: "absolute" }}  />
+        <video
+          ref={videoRef}
+          style={{ position: "absolute", zIndex: 0, width: "800px", height:"auto", left: "50%", transform: "translateX(-50%)" }}
+        />
+        <canvas
+          ref={canvasRef}
+          style={{ position: "absolute", zIndex: 1, width: "800px", left: "50%", transform: "translateX(-50%)" }}
+        />
       </div>
     </div>
   );
