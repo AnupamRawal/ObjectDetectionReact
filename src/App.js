@@ -8,6 +8,8 @@ function App() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [animationFrameId, setAnimationFrameId] = useState(null);
+  const [detectedObjects, setDetectedObjects] = useState([])
+
 
   // Load the COCO-SSD model
   const loadModel = async () => {
@@ -35,9 +37,10 @@ function App() {
         if (video.readyState === 4) {
           // Perform the object detection
           const obj = await net.detect(video);
+          setDetectedObjects(obj)
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           // Draw the detection results on the canvas
-          drawRect(obj, ctx);
+          drawRect(obj, ctx, canvas);
         }
         setAnimationFrameId(requestAnimationFrame(detect));
       };
@@ -62,11 +65,21 @@ function App() {
 
   return (
     <div className="App">
+      <div style={{ position: "absolute", top: 0, left: 0, padding: "10px", background: "white" }}>
+        <h3>Detected Objects:</h3>
+        <ul>
+          {detectedObjects.map((obj, i) => (
+            <li key={i}>
+              {obj.class} - {Math.round(obj.score * 100)}%
+            </li>
+          ))}
+        </ul>
+      </div>
       <input type="file" onChange={handleFileChange} />
       <div style={{ position: "relative" }}>
         <video
           ref={videoRef}
-          style={{ position: "absolute", zIndex: 0, width: "800px", height:"auto", left: "50%", transform: "translateX(-50%)" }}
+          style={{ position: "absolute", zIndex: 0, width: "800px", height: "auto", left: "50%", transform: "translateX(-50%)" }}
         />
         <canvas
           ref={canvasRef}
