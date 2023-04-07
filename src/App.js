@@ -34,22 +34,20 @@ function App() {
           // Perform the object detection
           const detections = await net.detect(video);
 
-          detections.forEach(predictions =>{
+          detections.forEach(predictions => {
             console.log(predictions)
             //get predictions result
             const [x, y, width, height] = predictions['bbox'];
             const text = predictions['class'];
-        
-           console.log(text, x, y, width, height);
-          //  const color = 'red';
-          //  ctx.strokeStyle = color;
-          //  ctx.font = "18px Arial";
-          //  ctx.fillStyle = color;
-        
-          //  ctx.beginPath();
-          //  ctx.fillText(text, x, y-10);
-          //  ctx.rect(x,y, width/2, height);
-          //  ctx.stroke();
+            const color = 'red';
+            ctx.strokeStyle = color;
+            ctx.font = "18px Arial";
+            ctx.fillStyle = color;
+
+            ctx.beginPath();
+            ctx.fillText(text, x, y - 10);
+            ctx.rect(x, y, width / 2, height);
+            ctx.stroke();
           })
         }
       };
@@ -73,7 +71,7 @@ function App() {
       <input type="file" onChange={handleFileChange} />
       <div style={{ position: "relative" }}>
         <video ref={videoRef} videoWidth="100%" style={{ position: "absolute" }} />
-        <canvas ref={canvasRef} style={{ position: "absolute" }}  />
+        <canvas ref={canvasRef} style={{ position: "absolute" }} />
       </div>
     </div>
   );
