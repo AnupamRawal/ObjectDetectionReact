@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Object detection in video 
+this app detects objects in video using tensorflow-coco ssd models
+these objects are printed over a video using canvas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
